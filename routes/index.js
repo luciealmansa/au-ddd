@@ -25,7 +25,7 @@ router.get('/signup', function(req, res) {
   res.render('signup');
 });
 
-router.post('/signup', async function(req, res) { //TODO validate signup
+router.post('/signup', UserController.validateNewUser(), async function(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.render('signup', {

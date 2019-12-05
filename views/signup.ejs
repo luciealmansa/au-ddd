@@ -10,8 +10,10 @@
 </head>
 
 <body>
-  <% if (typeof error !== 'undefined') { %>
-    <div>Erreur d'inscription</div>
+  <% if (typeof errors !== 'undefined') { %>
+    <% errors.forEach(error => { %>
+      <div><%= error.msg %></div>
+    <% }); %>
   <% } %>
   <form method="POST" action="/signup">
     <div>
@@ -31,8 +33,8 @@
       <input id="passwordInput" type="password" name="password" required>
     </div>
     <div>
-        <input type="radio" name="isGrantHolder" value="true"> Boursier<br>
-        <input type="radio" name="isGrantHolder" value="false"> Non Boursier<br>
+        <input type="radio" name="isGrantHolder" value="true" required> Boursier<br>
+        <input type="radio" name="isGrantHolder" value="false" required> Non Boursier<br>
     </div>
     <button type="submit">Inscription</button>
   </form>
