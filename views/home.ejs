@@ -9,6 +9,7 @@
         </div>
       <% } %>
 
+
     <!-- fixed-top-->
     <nav
         class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
@@ -21,6 +22,8 @@
                         
                     </ul>
                     <ul class="nav navbar-nav float-right">
+                        <%- console.log(user) %>
+                        <% if (user && typeof user != 'undefined'){%>
                         <li class="dropdown dropdown-user nav-item"><a
                                 class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 Mon compte</a>
@@ -37,58 +40,132 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item"><a class="nav-link dropdown-user-link">S'inscrire</a></li>
-                        <li class="nav-item"><a class="nav-link dropdown-user-link">Se connecter</a></li>
+                        <% } else { %>
+                        <li class="nav-item"><a class="nav-link dropdown-user-link" data-toggle="modal" data-target="#signup_modal">S'inscrire</a></li>
+                        <li class="nav-item"><a class="nav-link dropdown-user-link" data-toggle="modal" data-target="#login_modal" >Se connecter</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
+    <div class="modal fade" id="signup_modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">S'inscrire</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/signup" id="signup_form">
+                    <div>
+                      <label for="firstNameInput">Prénom</label>
+                      <input id="firstNameInput" type="text" name="firstName"required>
+                    </div>
+                    <div>
+                      <label for="lastNameInput">Nom</label>
+                      <input id="lastNameInput" type="text" name="lastName" required>
+                    </div>
+                    <div>
+                      <label for="emailInput">E-mail</label>
+                      <input id="emailInput" type="text" name="email" required>
+                    </div>
+                    <div>
+                        <label for="passwordInput">Password</label>
+                      <input id="passwordInput" type="password" name="password" required>
+                    </div>
+                    <div>
+                        <input type="radio" name="isGrantHolder" value="true" required> Boursier<br>
+                        <input type="radio" name="isGrantHolder" value="false" required> Non Boursier<br>
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="submit"  form="signup_form" class="btn btn-primary">Inscription</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="login_modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">Se connecter</h4>
+            </div>
+            <div class="modal-body">
+                <% if (typeof error !== "undefined" && error.length > 0) { %>
+                    <%- console.log(error) %>
+                    <div>error ! :<%= error %></div>
+                  <% } %>
+                  <form method="POST" action="/login">
+                    <div>
+                      <label for="emailInput">E-mail</label>
+                      <input id="emailInput" type="text" name="email" required>
+                    </div>
+                    <div>
+                        <label for="passwordInput">Password</label>
+                      <input id="passwordInput" type="password" name="password" required>
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="submit" form="login_modal" class="btn btn-primary">Connexion</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true"
         data-img="theme-assets/images/backgrounds/02.jpg">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo"
-                            alt="Chameleon admin logo" src="theme-assets/images/logo/logo.png" />
-                        <h3 class="brand-text">Chameleon</h3>
+                            alt="Chameleon admin logo" src="/public/css/logo.png" />
+                        <h3 class="brand-text">EtudiTips</h3>
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
             </ul>
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active"><a href="index.html"><i class="ft-home"></i><span class="menu-title"
-                            data-i18n="">Dashboard</span></a>
+                <li class="active"><a href="/logement"><i class="ft-home"></i><span class="menu-title"
+                            data-i18n="">Logement</span></a>
                 </li>
-                <li class=" nav-item"><a href="charts.html"><i class="ft-pie-chart"></i><span class="menu-title"
-                            data-i18n="">Charts</span></a>
+                <li class=" nav-item"><a href="/sante"><i class="la la-medkit"></i><span class="menu-title"
+                            data-i18n="">Santé</span></a>
                 </li>
-                <li class=" nav-item"><a href="icons.html"><i class="ft-droplet"></i><span class="menu-title"
-                            data-i18n="">Icons</span></a>
+                <li class=" nav-item"><a href="/aides-financieres"><i class=" la la-money"></i><span class="menu-title"
+                            data-i18n="">Aides financières</span></a>
                 </li>
-                <li class=" nav-item"><a href="cards.html"><i class="ft-layers"></i><span class="menu-title"
-                            data-i18n="">Cards</span></a>
+                <li class=" nav-item"><a href="/etudes"><i class="la la-graduation-cap"></i><span class="menu-title"
+                            data-i18n="">Etudes</span></a>
                 </li>
-                <li class=" nav-item"><a href="buttons.html"><i class="ft-box"></i><span class="menu-title"
-                            data-i18n="">Buttons</span></a>
+                <li class=" nav-item"><a href="/job"><i class="la la-suitcase"></i><span class="menu-title"
+                            data-i18n="">Job</span></a>
                 </li>
-                <li class=" nav-item"><a href="typography.html"><i class="ft-bold"></i><span class="menu-title"
-                            data-i18n="">Typography</span></a>
+                <li class=" nav-item"><a href="/bien-etre"><i class="la la-smile-o"></i><span class="menu-title"
+                            data-i18n="">Bien-être</span></a>
                 </li>
-                <li class=" nav-item"><a href="tables.html"><i class="ft-credit-card"></i><span class="menu-title"
-                            data-i18n="">Tables</span></a>
+                <li class=" nav-item"><a href="/transports"><i class="la la-car"></i><span class="menu-title"
+                            data-i18n="">Transports</span></a>
                 </li>
-                <li class=" nav-item"><a href="form-elements.html"><i class="ft-layout"></i><span class="menu-title"
-                            data-i18n="">Form Elements</span></a>
+                <li class=" nav-item"><a href="/se-nourrir"><i class="la la-cutlery"></i><span class="menu-title"
+                            data-i18n="">Se nourrir</span></a>
                 </li>
-                <li class=" nav-item"><a
-                        href="https://themeselection.com/demo/chameleon-admin-template/documentation"><i
-                            class="ft-book"></i><span class="menu-title" data-i18n="">Documentation</span></a>
-                </li>
+                <li class=" nav-item"><a href="/loisirs"><i class="la la-headphones"></i><span class="menu-title"
+                    data-i18n="">Loisirs</span></a>
+        </li>
+                <li class=" nav-item"><a href="/bons-plans"><i class="la la-hand-pointer-o"></i><span class="menu-title"
+                    data-i18n="">Bons plans</span></a>
+        </li>
             </ul>
         </div>
         <div class="navigation-background"></div>
