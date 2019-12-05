@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Connexion</title>
+  <meta name="author" content="Au DDD">
+  <link rel="stylesheet" href="/public/css/bootstrap.css">
+</head>
+
+<body>
+  <% if (error && error.length > 0) { %>
+    <%- console.log(error) %>
+    <div>error ! :<%= error %></div>
+  <% } %>
+  <form method="POST" action="/login">
+    <div>
+      <label for="emailInput">E-mail</label>
+      <input id="emailInput" type="text" name="email" required>
+    </div>
+    <div>
+        <label for="passwordInput">Password</label>
+      <input id="passwordInput" type="password" name="password" required>
+    </div>
+    <button type="submit">Connexion</button>
+  </form>
+</body>
+</html>
