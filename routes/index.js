@@ -1,8 +1,21 @@
 var express = require('express');
 var router = express.Router();
+const path = require('path');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { check, validationResult } = require('express-validator');
+
+const multer = require('multer');
+//multer
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'public/uploads/');
+  },
+  filename: (req, file, cb) => {
+      cb(null, req.user._id + '-' + file.originalname);
+  }
+});
+var upload = multer({ storage: storage});
 
 const UserController = require('../controllers/user.controller');
 
@@ -43,6 +56,15 @@ router.post('/signup', UserController.validateNewUser(), async function(req, res
 
   await UserController.createUser(userObject);
   res.render('home', { flash: 'Inscription réussie !' });
+});
+
+router.get('/testUpload', function(req, res) {
+  res.render('testUpload');
+});
+
+router.post('/testUpload', upload.single('file'), function(req,res) {
+  console.log('storage location is ', req.hostname +'/' + req.file.path);
+  return res.send(req.file);
 });
 
 module.exports = router;

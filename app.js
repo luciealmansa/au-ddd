@@ -14,6 +14,13 @@ mongoose.connect(mongoDB, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console,'MongoDB connection error:'));
 
+
+
+//session 
+app.use(session({ secret: 'secret',
+                  resave: false,
+                  saveUninitialized: false}));
+
 // passport
 require('./config/passport')(passport)
 app.use(passport.initialize());
@@ -23,10 +30,6 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 
-//session 
-app.use(session({ secret: 'secret',
-                  resave: false,
-                  saveUninitialized: false}));
 
 //flash
 app.use(flash());
