@@ -21,7 +21,7 @@ const UserController = require('../controllers/user.controller');
 
 // GET home page.
 router.get('/', function(req, res) {
-  res.render('home');
+  res.render('home', { page: './homePage' });
 });
 
 router.get('/login', function(req, res) {
@@ -65,6 +65,46 @@ router.get('/testUpload', function(req, res) {
 router.post('/testUpload', upload.single('file'), function(req,res) {
   console.log('storage location is ', req.hostname +'/' + req.file.path);
   return res.send(req.file);
+});
+
+router.get('/logement', function(req, res) {
+  res.render('home', { page: './housing' });
+});
+
+router.get('/sante', function(req, res) {
+  res.render('home', { page: './health' });
+});
+
+router.get('/aides-financieres', function(req, res) {
+  res.render('home', { page: './money' });
+});
+
+router.get('/etudes', function(req, res) {
+  res.render('home', { page: './studies' });
+});
+
+router.get('/job', function(req, res) {
+  res.render('home', { page: './job' });
+});
+
+router.get('/bien-etre', function(req, res) {
+  res.render('home', { page: './wellbeing' });
+});
+
+router.get('/transports', function(req, res) {
+  res.render('home', { page: './transportation' });
+});
+
+router.get('/se-nourrir', function(req, res) {
+  res.render('home', { page: './food' });
+});
+
+router.get('/loisirs', function(req, res) {
+  res.render('home', { page: './hobbies' });
+});
+
+router.get('/bons-plans', function(req, res) {
+  res.render('home', { page: './tips' });
 });
 
 module.exports = router;
