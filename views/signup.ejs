@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Inscription</title>
+  <meta name="author" content="Au DDD">
+  <link rel="stylesheet" href="/public/css/bootstrap.css">
+</head>
+
+<body>
+  <% if (typeof error !== 'undefined') { %>
+    <div>Erreur d'inscription</div>
+  <% } %>
+  <form method="POST" action="/signup">
+    <div>
+      <label for="firstNameInput">Prénom</label>
+      <input id="firstNameInput" type="text" name="firstName"required>
+    </div>
+    <div>
+      <label for="lastNameInput">Nom</label>
+      <input id="lastNameInput" type="text" name="lastName" required>
+    </div>
+    <div>
+      <label for="emailInput">E-mail</label>
+      <input id="emailInput" type="text" name="email" required>
+    </div>
+    <div>
+        <label for="passwordInput">Password</label>
+      <input id="passwordInput" type="password" name="password" required>
+    </div>
+    <div>
+        <input type="radio" name="isGrantHolder" value="true"> Boursier<br>
+        <input type="radio" name="isGrantHolder" value="false"> Non Boursier<br>
+    </div>
+    <button type="submit">Inscription</button>
+  </form>
+</body>
+</html>

@@ -10,6 +10,11 @@
 </head>
 
 <body>
+<% if(typeof flash != 'undefined') { %>
+  <div>
+    <%= flash %>
+  </div>
+<% } %>
 <button type="button" class="btn btn-primary">Salut</button>
 </body>
 </html>
