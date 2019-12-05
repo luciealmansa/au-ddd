@@ -14,6 +14,13 @@ mongoose.connect(mongoDB, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console,'MongoDB connection error:'));
 
+
+
+//session 
+app.use(session({ secret: 'secret',
+                  resave: false,
+                  saveUninitialized: false}));
+
 // passport
 require('./config/passport')(passport)
 app.use(passport.initialize());
@@ -23,10 +30,6 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 
-//session 
-app.use(session({ secret: 'secret',
-                  resave: false,
-                  saveUninitialized: false}));
 
 //flash
 app.use(flash());
@@ -35,6 +38,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
+
+app.use(function(req, res, next){
+    res.status(404);
+  
+    // respond with html page
+    if (req.accepts('html')) {
+      res.render('home', { url: req.url, page: './404' });
+      return;
+    }
+  
+    // respond with json
+    if (req.accepts('json')) {
+      res.send({ error: 'Not found' });
+      return;
+    }
+  
+    // default to plain-text. send()
+    res.type('txt').send('Not found');
+  });
 
 const port = 3000;
 

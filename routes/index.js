@@ -1,14 +1,27 @@
 var express = require('express');
 var router = express.Router();
+const path = require('path');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { check, validationResult } = require('express-validator');
+
+const multer = require('multer');
+//multer
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'public/uploads/');
+  },
+  filename: (req, file, cb) => {
+      cb(null, req.user._id + '-' + file.originalname);
+  }
+});
+var upload = multer({ storage: storage});
 
 const UserController = require('../controllers/user.controller');
 
 // GET home page.
 router.get('/', function(req, res) {
-  res.render('home');
+  res.render('home', { page: './homePage' });
 });
 
 router.get('/login', function(req, res) {
@@ -43,6 +56,55 @@ router.post('/signup', UserController.validateNewUser(), async function(req, res
 
   await UserController.createUser(userObject);
   res.render('home', { flash: 'Inscription réussie !' });
+});
+
+router.get('/testUpload', function(req, res) {
+  res.render('testUpload');
+});
+
+router.post('/testUpload', upload.single('file'), function(req,res) {
+  console.log('storage location is ', req.hostname +'/' + req.file.path);
+  return res.send(req.file);
+});
+
+router.get('/logement', function(req, res) {
+  res.render('home', { page: './housing' });
+});
+
+router.get('/sante', function(req, res) {
+  res.render('home', { page: './health' });
+});
+
+router.get('/aides-financieres', function(req, res) {
+  res.render('home', { page: './money' });
+});
+
+router.get('/etudes', function(req, res) {
+  res.render('home', { page: './studies' });
+});
+
+router.get('/job', function(req, res) {
+  res.render('home', { page: './job' });
+});
+
+router.get('/bien-etre', function(req, res) {
+  res.render('home', { page: './wellbeing' });
+});
+
+router.get('/transports', function(req, res) {
+  res.render('home', { page: './transportation' });
+});
+
+router.get('/se-nourrir', function(req, res) {
+  res.render('home', { page: './food' });
+});
+
+router.get('/loisirs', function(req, res) {
+  res.render('home', { page: './hobbies' });
+});
+
+router.get('/bons-plans', function(req, res) {
+  res.render('home', { page: './tips' });
 });
 
 module.exports = router;

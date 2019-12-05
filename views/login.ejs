@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <% if (error && error.length > 0) { %>
+  <% if (typeof error !== 'undefined' && error.length > 0) { %>
     <%- console.log(error) %>
     <div>error ! :<%= error %></div>
   <% } %>
