@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/luciealmansa/au-ddd#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.13"
   }
 }
