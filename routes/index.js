@@ -79,6 +79,9 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/profil', function (req, res) {
+  if(!req.user || typeof req.user == 'undefined'){
+    return res.send("Vous devez être authentifié pour accéder à cette page").status('401');
+  }
   res.render('home', { page: './profile', user: req.user });
 });
 
@@ -97,6 +100,9 @@ router.post('/profile/upload', upload.fields([
   { name: 'numAllocCaf', maxCount: 1 },
   { name: 'revenus', maxCount: 1 }
 ]), function (req, res) {
+  if(!req.user || typeof req.user == 'undefined'){
+    return res.send("Vous devez être authentifié pour accéder à cette page").status('401');
+  }
   for(file_key in req.files){
     console.log("file:");
     console.log(file_key);
