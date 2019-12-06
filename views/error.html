@@ -3,11 +3,11 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/public/components/stressBar.js"></script>
-    <script src="/public/components/moneyBar.js"></script>
-    <script src="/public/components/sleepBar.js"></script>
-    <script src="/public/components/score.js"></script>
-    <script src="/public/components/player.js"></script>
+    <script src="components/stressBar.js"></script>
+    <script src="components/moneyBar.js"></script>
+    <script src="components/sleepBar.js"></script>
+    <script src="components/score.js"></script>
+    <script src="player.js"></script>
 
     <style>
         canvas {
@@ -16,7 +16,6 @@
         }
     </style>
 </head>
-
 <body style="text-align: center;" onload="startGame()">
     <script>
         var player;
@@ -26,8 +25,8 @@
 
         var score;
 
-        var canvasWidth = window.innerWidth*0.9;
-        var canvasHeight = window.innerHeight*0.9;
+        var canvasWidth = window.innerWidth*0.5;
+        var canvasHeight = window.innerHeight*0.8;
         var drawing;
 
         var listOfBadGuys;
@@ -380,5 +379,6 @@
 
     </script>
 </body>
+<h2>Erreur 404, la page que vous avez demandé n'existe pas.</h2>
 
 </html>

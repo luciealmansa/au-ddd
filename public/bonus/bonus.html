@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="startGame()">
+<script>
+
+var bonusActive;
+var chrono;
+const chronoStep = 1;
+var flikerChrono
+const MEDIUM = 40;
+const money = new component(MEDIUM, MEDIUM, "./billets.png", 10, 5, (0,0,20));
+const cupOfTea = new component(MEDIUM, MEDIUM, "./tea.png", 10, 5, (-20,0,0));
+const bed = new component(MEDIUM, MEDIUM, "./sleeping.png", 10, 5, (0,20,0));
+
+function startGame() {
+    myGameArea.start();
+    chrono = 0;
+    flikerChrono = 60
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(createBonus, 20);
+    },
+    clear: function () {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function flikering() {
+    if(flikerChrono > 40 || (flikerChrono > 0 && flikerChrono < 20)){
+        myGameArea.clear();
+    } else {
+        bonusActive.update();
+    }
+    if(flikerChrono <= 0) flikerChrono = 60
+    flikerChrono = flikerChrono - 3
+}
+
+function createBonus() {
+    if(chrono <= 0) {
+        myGameArea.clear();
+        bonusActive = generatePiece();
+        bonusActive.setRandomPosition();
+        bonusActive.update();
+        chrono = 220;
+    } else if (chrono <= 60){
+        flikering()
+    }
+    chrono = chrono - chronoStep;
+    console.log(chrono)
+}
+
+function bonusTaken() {
+    chrono = 0;
+}
+
+function component(width, height, color, x, y, bonusValue) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;    
+    this.bonusValue = bonusValue;
+    this.image = new Image();
+    this.image.src = color;
+    this.update = function () {
+        ctx = myGameArea.context;
+        ctx.drawImage(this.image, 
+                    this.x, 
+                    this.y,
+                    this.width, this.height);
+
+        console.log(this.image)
+    }
+    this.setRandomPosition = function () {
+        this.x = getRandomInt(5, myGameArea.canvas.width - 100);
+        this.y = getRandomInt(5, myGameArea.canvas.height - 100);
+    }
+}
+
+function generatePiece() {
+    let randomNumber = getRandomInt(0, 30);
+    if (randomNumber < 10)
+        return money;
+    else if (randomNumber < 20)
+        return cupOfTea;
+    else if (randomNumber < 30)
+        return bed;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+</script>
+
+</body>
+</html>
