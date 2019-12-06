@@ -6,7 +6,8 @@ var userSchema = Schema({
   lastName: String,
   email: String,
   password: String,
-  isGrantHolder: Boolean
+  isGrantHolder: Boolean,
+  files : Object
 });
 
 const User = mongoose.model('users', userSchema);

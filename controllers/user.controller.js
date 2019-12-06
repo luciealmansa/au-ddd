@@ -3,7 +3,7 @@ const User = require('../models/user.model');
 const { check, validationResult } = require('express-validator');
 
 
-module.exports.validateNewUser = function() {
+module.exports.validateNewUser = function () {
   return [
     check('firstName').not().isEmpty().withMessage('Prénom requis'),
     check('lastName').not().isEmpty().withMessage('Nom de famille requis'),
@@ -32,6 +32,63 @@ module.exports.validPassword = function (candidatePassword, hash, callback) {
   });
 }
 
+module.exports.setFile = function (user_id, fileType, fileName) {
+  return new Promise(function (resolve) {
+    console.log("les arguments : ");
+    console.log(user_id);
+    console.log(fileType);
+    console.log(fileName);
+    let query;
+    switch (fileType) {
+      case "carteID":
+        query = { $set: { "files.carteID": fileName } };
+        break;
+      case "certifScol":
+        query = { $set: { "files.certifScol": fileName } };
+        break;
+      case "RIB":
+        query = { $set: { "files.RIB": fileName } };
+        break;
+      case "photoID":
+        query = { $set: { "files.photoID": fileName } };
+        break;
+      case "CV":
+        query = { $set: { "files.CV": fileName } };
+        break;
+      case "justifDomi":
+        query = { $set: { "files.justifDomi": fileName } };
+        break;
+      case "attestRecensement":
+        query = { $set: { "files.attestRecensement": fileName } };
+        break;
+      case "diplome":
+        query = { $set: { "files.diplome": fileName } };
+        break;
+      case "avisImpots":
+        query = { $set: { "files.avisImpots": fileName } };
+        break;
+      case "attestSecu":
+        query = { $set: { "files.attestSecu": fileName } };
+        break;
+      case "bail":
+        query = { $set: { "files.bail": fileName } };
+        break;
+      case "numAllocCaf":
+        query = { $set: { "files.numAllocCaf": fileName } };
+        break;
+      case "revenus":
+        query = { $set: { "files.revenus": fileName } };
+        break;
+    }
+    User.findByIdAndUpdate(user_id,
+      query,
+      (err) => {
+        if (err) throw err;
+        resolve();
+      });
+  });
+}
+
 module.exports.createUser = function (userObject) {
   return new Promise(function (resolve) {
     let userInstance = new User(userObject);
@@ -41,7 +98,7 @@ module.exports.createUser = function (userObject) {
         userInstance.password = hash;
         userInstance.save((err) => {
           if (err) throw err;
-          resolve()
+          resolve();
         });
       });
     });

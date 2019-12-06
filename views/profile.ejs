@@ -1,0 +1,21 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <form method="POST" action="/profile/upload" enctype="multipart/form-data">
+    <% for ( filetype in user.files ) { %>
+    <label for="<%= filetype %>"><%= filetype %></label>
+    <% if(user.files[filetype].length > 0) {%>
+      <a href="/public/uploads/<%= user._id %>-<%=user.files[filetype]%>" download="<%=user.files[filetype]%>">Télécharger</a>
+    <% } %>
+    <a href="#"></a>
+    <div><input type="file" name="<%= filetype %>" id="<%= filetype %>" class="fileUpload" /></div>
+    <% } %>
+    <button type="submit">Ok</button>
+  </form>
+</body>
+
+</html>
