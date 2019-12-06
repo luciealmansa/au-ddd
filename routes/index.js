@@ -79,7 +79,7 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/profile', function (req, res) {
-  res.render('profile', { user: req.user });
+  res.render('home', { page: './profile', user: req.user });
 });
 
 router.post('/profile/upload', upload.fields([
