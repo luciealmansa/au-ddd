@@ -72,7 +72,7 @@ router.post('/testUpload', upload.single('file'), function(req,res) {
   return res.send(req.file);
 });
 
-router.post('/newReminder', function(req, res) { //TODO sanitize reminder :))))))))))))
+router.post('/newReminder', async function(req, res) { //TODO sanitize reminder :))))))))))))
   let reminderObject = {
     date: new Date(req.body.date),
     title: req.body.title,
