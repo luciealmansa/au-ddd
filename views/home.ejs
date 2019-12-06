@@ -35,7 +35,7 @@ data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-col
                                 <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="user-name text-bold-700 ml-1">
                                     <%= user.firstName + " " %><%- user.lastName %>
                                 </span></a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="/profil"><i
                                             class="ft-user"></i> Mon profil</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="/logout"><i
                                             class="ft-power"></i> Se déconnecter</a>
@@ -66,23 +66,24 @@ data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-col
                 <form method="POST" action="/signup" id="signup_form">
                     <div>
                       <label for="firstNameInput">Prénom</label>
-                      <input id="firstNameInput" type="text" name="firstName"required>
+                      <input class="form-control" id="firstNameInput" type="text" name="firstName"required>
                     </div>
                     <div>
                       <label for="lastNameInput">Nom</label>
-                      <input id="lastNameInput" type="text" name="lastName" required>
+                      <input class="form-control" id="lastNameInput" type="text" name="lastName" required>
                     </div>
                     <div>
                       <label for="emailInput">E-mail</label>
-                      <input id="emailInput" type="text" name="email" required>
+                      <input class="form-control" id="emailInput" type="text" name="email" required>
                     </div>
                     <div>
                         <label for="passwordInput">Password</label>
-                      <input id="passwordInput" type="password" name="password" required>
+                      <input class="form-control" id="passwordInput" type="password" name="password" required>
                     </div>
+                    <br />
                     <div>
-                        <input type="radio" name="isGrantHolder" value="true" required> Boursier<br>
-                        <input type="radio" name="isGrantHolder" value="false" required> Non Boursier<br>
+                        <input  type="radio" name="isGrantHolder" value="true" required> Boursier<br>
+                        <input  type="radio" name="isGrantHolder" value="false" required> Non Boursier<br>
                     </div>
                   </form>
             </div>
@@ -110,11 +111,11 @@ data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-col
                   <form method="POST" id="login_form" action="/login">
                     <div>
                       <label for="emailInput">E-mail</label>
-                      <input id="emailInput" type="text" name="email" required>
+                      <input class="form-control" id="emailInput" type="text" name="email" required>
                     </div>
                     <div>
                         <label for="passwordInput">Password</label>
-                      <input id="passwordInput" type="password" name="password" required>
+                      <input class="form-control" id="passwordInput" type="password" name="password" required>
                     </div>
                   </form>
             </div>

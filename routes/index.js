@@ -78,7 +78,7 @@ router.get('/logout', function (req, res, next) {
   res.redirect('/');
 });
 
-router.get('/profile', function (req, res) {
+router.get('/profil', function (req, res) {
   res.render('home', { page: './profile', user: req.user });
 });
 

@@ -1,21 +1,58 @@
-<html>
+<div class="app-content content">
+  <div class="content-wrapper">
+    <div class="content-wrapper-before"></div>
+    <div class="content-header row">
+      <div class="content-header-left col-md-4 col-12 mb-2">
+        <h3 class="content-header-title"><%= user.firstName %> <%= user.lastName %></h3>
+      </div>
+    </div>
 
-<head>
+    <div class="content-body">
+      <section id="line-awesome-icons">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content collapse show">
+                <div class="card-body">
+                  <h4 class="card-title">Mes documents sauvegardés</h4>
 
-</head>
+                  <form method="POST" action="/profile/upload" enctype="multipart/form-data">
+                    <div class="container">
+                      <div class="row">
+                        <% for ( filetype in user.files ) { %>
+                        <div class="col-sm-4">
+                          <div class="file_row">
+                            <label for="<%= filetype %>"><%= filetype %></label>
+                            <% if(user.files[filetype].length > 0) {%>
+                            <a href="/public/uploads/<%= user._id %>-<%=user.files[filetype]%>"
+                              download="<%=user.files[filetype]%>"><i class="la la-download"></i></a>
+                            <% } %>
+                            <a href="#"></a>
+                            <div><input type="file" name="<%= filetype %>" id="<%= filetype %>" class="fileUpload" />
+                            </div>
+                          </div>
+                        </div>
+                        <% } %>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-2 offset-md-5">
+                              <button class="btn save_btn center-block" type="submit">Sauvegarder</button>
+                            </div>
+                          </div>
+                        </div>
 
-<body>
-  <form method="POST" action="/profile/upload" enctype="multipart/form-data">
-    <% for ( filetype in user.files ) { %>
-    <label for="<%= filetype %>"><%= filetype %></label>
-    <% if(user.files[filetype].length > 0) {%>
-      <a href="/public/uploads/<%= user._id %>-<%=user.files[filetype]%>" download="<%=user.files[filetype]%>">Télécharger</a>
-    <% } %>
-    <a href="#"></a>
-    <div><input type="file" name="<%= filetype %>" id="<%= filetype %>" class="fileUpload" /></div>
-    <% } %>
-    <button type="submit">Ok</button>
-  </form>
-</body>
 
-</html>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  </section>
+</div>
+</div>
+</div>
