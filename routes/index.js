@@ -58,6 +58,11 @@ router.post('/signup', UserController.validateNewUser(), async function(req, res
   res.render('home', { flash: 'Inscription réussie !' });
 });
 
+router.get('/logout', function (req, res, next) {
+  req.logout();
+  res.redirect('/');
+});
+
 router.get('/testUpload', function(req, res) {
   res.render('testUpload');
 });
