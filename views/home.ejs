@@ -22,20 +22,20 @@
                         
                     </ul>
                     <ul class="nav navbar-nav float-right">
-                        <%- console.log(user) %>
                         <% if (user && typeof user != 'undefined'){%>
                         <li class="dropdown dropdown-user nav-item"><a
                                 class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 Mon compte</a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="user-name text-bold-700 ml-1">John
-                                                Doe</span></a>
+                                <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="user-name text-bold-700 ml-1">
+                                    <%= user.firstName + " " %><%- user.lastName %>
+                                </span></a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
                                             class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i
                                             class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i
                                             class="ft-check-square"></i> Task</a><a class="dropdown-item" href="#"><i
                                             class="ft-message-square"></i> Chats</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="/logout"><i
                                             class="ft-power"></i> Logout</a>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                     <%- console.log(error) %>
                     <div>error ! :<%= error %></div>
                   <% } %>
-                  <form method="POST" action="/login">
+                  <form method="POST" id="login_form" action="/login">
                     <div>
                       <label for="emailInput">E-mail</label>
                       <input id="emailInput" type="text" name="email" required>
@@ -117,7 +117,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-              <button type="submit" form="login_modal" class="btn btn-primary">Connexion</button>
+              <button type="submit" form="login_form" class="btn btn-primary">Connexion</button>
             </div>
           </div>
         </div>
@@ -136,7 +136,7 @@
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active"><a href="/logement"><i class="ft-home"></i><span class="menu-title"
+                <li class=" nav-item"><a href="/logement"><i class="ft-home"></i><span class="menu-title"
                             data-i18n="">Logement</span></a>
                 </li>
                 <li class=" nav-item"><a href="/sante"><i class="la la-medkit"></i><span class="menu-title"
@@ -238,7 +238,6 @@
             </div>
         </div>
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <%- include('./partials/footer.ejs') %>
 
