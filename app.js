@@ -44,7 +44,7 @@ app.use(function(req, res, next){
   
     // respond with html page
     if (req.accepts('html')) {
-      res.render('home', { url: req.url, page: './404' });
+      res.render('home', { url: req.url, page: './404', user : req.user });
       return;
     }
   

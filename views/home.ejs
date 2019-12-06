@@ -1,16 +1,21 @@
 <%- include('./partials/header.ejs') %>
 
-<body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click"
-    data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+<% if (page != './homePage') { %>
+  <body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click"
+data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+<% } %>
+
+<% if (page == './homePage') { %>
+  <body class="vertical-layout 2-columns menu-expanded fixed-navbar" data-open="click"
+data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+<% } %>
+
 
     <% if(typeof flash != 'undefined') { %>
         <div>
           <%= flash %>
         </div>
       <% } %>
-
-
-    <!-- fixed-top-->
     <nav
         class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
         <div class="navbar-wrapper">
@@ -49,6 +54,7 @@
             </div>
         </div>
     </nav>
+    
 
     <div class="modal fade" id="signup_modal">
         <div class="modal-dialog" role="document">
@@ -123,122 +129,12 @@
         </div>
       </div>
 
-    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true"
-        data-img="theme-assets/images/backgrounds/02.jpg">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo"
-                            alt="Chameleon admin logo" src="/public/css/logo.png" />
-                        <h3 class="brand-text">EtudiTips</h3>
-                    </a></li>
-                <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
-            </ul>
-        </div>
-        <div class="main-menu-content">
-            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a href="/logement"><i class="ft-home"></i><span class="menu-title"
-                            data-i18n="">Logement</span></a>
-                </li>
-                <li class=" nav-item"><a href="/sante"><i class="la la-medkit"></i><span class="menu-title"
-                            data-i18n="">Santé</span></a>
-                </li>
-                <li class=" nav-item"><a href="/aides-financieres"><i class=" la la-money"></i><span class="menu-title"
-                            data-i18n="">Aides financières</span></a>
-                </li>
-                <li class=" nav-item"><a href="/etudes"><i class="la la-graduation-cap"></i><span class="menu-title"
-                            data-i18n="">Etudes</span></a>
-                </li>
-                <li class=" nav-item"><a href="/job"><i class="la la-suitcase"></i><span class="menu-title"
-                            data-i18n="">Job</span></a>
-                </li>
-                <li class=" nav-item"><a href="/bien-etre"><i class="la la-smile-o"></i><span class="menu-title"
-                            data-i18n="">Bien-être</span></a>
-                </li>
-                <li class=" nav-item"><a href="/transports"><i class="la la-car"></i><span class="menu-title"
-                            data-i18n="">Transports</span></a>
-                </li>
-                <li class=" nav-item"><a href="/se-nourrir"><i class="la la-cutlery"></i><span class="menu-title"
-                            data-i18n="">Se nourrir</span></a>
-                </li>
-                <li class=" nav-item"><a href="/loisirs"><i class="la la-headphones"></i><span class="menu-title"
-                    data-i18n="">Loisirs</span></a>
-        </li>
-                <li class=" nav-item"><a href="/bons-plans"><i class="la la-hand-pointer-o"></i><span class="menu-title"
-                    data-i18n="">Bons plans</span></a>
-        </li>
-            </ul>
-        </div>
-        <div class="navigation-background"></div>
-    </div>
 
-    <div class="app-content content">
-        <div class="content-wrapper">
-            <div class="content-wrapper-before"></div>
-            <div class="content-header row">
-            </div>
-            <div class="content-body">
-                <!-- Chart -->
-                <div class="row match-height">
-                    <div class="col-12">
-                        <div class="">
-                            <div id="gradient-line-chart1" class="height-250 GradientlineShadow1"></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Chart -->
-                <!-- eCommerce statistic -->
-                <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-md-12">
-                        <div class="card pull-up ecom-card-1 bg-white">
-                            <div class="card-content ecom-card2 height-180">
-                                <h5 class="text-muted danger position-absolute p-1">Progress Stats</h5>
-                                <div>
-                                    <i class="ft-pie-chart danger font-large-1 float-right p-1"></i>
-                                </div>
-                                <div
-                                    class="progress-stats-container ct-golden-section height-75 position-relative pt-3  ">
-                                    <div id="progress-stats-bar-chart"></div>
-                                    <div id="progress-stats-line-chart" class="progress-stats-shadow"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-12">
-                        <div class="card pull-up ecom-card-1 bg-white">
-                            <div class="card-content ecom-card2 height-180">
-                                <h5 class="text-muted info position-absolute p-1">Activity Stats</h5>
-                                <div>
-                                    <i class="ft-activity info font-large-1 float-right p-1"></i>
-                                </div>
-                                <div
-                                    class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
-                                    <div id="progress-stats-bar-chart1"></div>
-                                    <div id="progress-stats-line-chart1" class="progress-stats-shadow"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-12">
-                        <div class="card pull-up ecom-card-1 bg-white">
-                            <div class="card-content ecom-card2 height-180">
-                                <h5 class="text-muted warning position-absolute p-1">Sales Stats</h5>
-                                <div>
-                                    <i class="ft-shopping-cart warning font-large-1 float-right p-1"></i>
-                                </div>
-                                <div
-                                    class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
-                                    <div id="progress-stats-bar-chart2"></div>
-                                    <div id="progress-stats-line-chart2" class="progress-stats-shadow"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--/ eCommerce statistic -->
-            </div>
-        </div>
-    </div>
+    <% if (page != './homePage') { %>
+      <%- include('./partials/menu.ejs') %>
+    <% } %>
+
+    <%- include(page) %>
 
     <%- include('./partials/footer.ejs') %>
 
-    <%- include(page) %>
