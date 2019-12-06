@@ -21,7 +21,7 @@ const UserController = require('../controllers/user.controller');
 
 // GET home page.
 router.get('/', function(req, res) {
-  res.render('home', { page: './homePage' });
+  res.render('home', { page: './homePage', user : req.user });
 });
 
 router.get('/login', function(req, res) {
@@ -30,7 +30,7 @@ router.get('/login', function(req, res) {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login',
+  failureRedirect: '/',
   failureFlash: true
 }));
 
@@ -55,7 +55,7 @@ router.post('/signup', UserController.validateNewUser(), async function(req, res
   };
 
   await UserController.createUser(userObject);
-  res.render('home', { flash: 'Inscription réussie !' });
+  res.render('home', { page : './homePage', flash: 'Inscription réussie !', user : req.user });
 });
 
 router.get('/logout', function (req, res, next) {
@@ -73,43 +73,43 @@ router.post('/testUpload', upload.single('file'), function(req,res) {
 });
 
 router.get('/logement', function(req, res) {
-  res.render('home', { page: './housing' });
+  res.render('home', { page: './housing', user : req.user });
 });
 
 router.get('/sante', function(req, res) {
-  res.render('home', { page: './health' });
+  res.render('home', { page: './health', user : req.user });
 });
 
 router.get('/aides-financieres', function(req, res) {
-  res.render('home', { page: './money' });
+  res.render('home', { page: './money', user : req.user });
 });
 
 router.get('/etudes', function(req, res) {
-  res.render('home', { page: './studies' });
+  res.render('home', { page: './studies', user : req.user });
 });
 
 router.get('/job', function(req, res) {
-  res.render('home', { page: './job' });
+  res.render('home', { page: './job' , user : req.user});
 });
 
 router.get('/bien-etre', function(req, res) {
-  res.render('home', { page: './wellbeing' });
+  res.render('home', { page: './wellbeing', user : req.user });
 });
 
 router.get('/transports', function(req, res) {
-  res.render('home', { page: './transportation' });
+  res.render('home', { page: './transportation', user : req.user });
 });
 
 router.get('/se-nourrir', function(req, res) {
-  res.render('home', { page: './food' });
+  res.render('home', { page: './food', user : req.user});
 });
 
 router.get('/loisirs', function(req, res) {
-  res.render('home', { page: './hobbies' });
+  res.render('home', { page: './hobbies', user : req.user});
 });
 
 router.get('/bons-plans', function(req, res) {
-  res.render('home', { page: './tips' });
+  res.render('home', { page: './tips', user : req.user});
 });
 
 module.exports = router;
