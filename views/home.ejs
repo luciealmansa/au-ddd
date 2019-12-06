@@ -1,140 +1,157 @@
 <%- include('./partials/header.ejs') %>
 
 <% if (page != './homePage') { %>
-  <body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click"
-data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
-<% } %>
 
-<% if (page == './homePage') { %>
-  <body class="vertical-layout 2-columns menu-expanded fixed-navbar" data-open="click"
-data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
-<% } %>
+<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click"
+  data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+  <% } %>
+
+  <% if (page == './homePage') { %>
+
+  <body class="vertical-layout 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu"
+    data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+    <% } %>
+
+    <script>
+      <% if ( typeof errors != 'undefined' && errors) { %>
+        <%- console.log(errors) %>
+        let errors = <% - JSON.stringify(errors) %>;
+        errors.forEach(element => {
+          document.getElementById("error").innerHTML += error.msg;
+          console.log(error.msg);
+          console.log(document.getElementById("error"))
+        });
+      <% } %>
+    </script>
+
+
 
 
     <% if(typeof flash != 'undefined') { %>
-        <div>
-          <%= flash %>
-        </div>
-      <% } %>
+    <div>
+      <%= flash %>
+    </div>
+    <% } %>
     <nav
-        class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
-        <div class="navbar-wrapper">
-            <div class="navbar-container content">
-                <div class="collapse navbar-collapse show" id="navbar-mobile">
-                    <ul class="nav navbar-nav mr-auto float-left">
-                    </ul>
-                    <ul class="nav navbar-nav float-right">
-                        
-                    </ul>
-                    <ul class="nav navbar-nav float-right">
-                        <% if (user && typeof user != 'undefined'){%>
-                        <li class="dropdown dropdown-user nav-item"><a
-                                class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                Mon compte</a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="user-name text-bold-700 ml-1">
-                                    <%= user.firstName + " " %><%- user.lastName %>
-                                </span></a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
-                                            class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i
-                                            class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i
-                                            class="ft-check-square"></i> Task</a><a class="dropdown-item" href="#"><i
-                                            class="ft-message-square"></i> Chats</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="/logout"><i
-                                            class="ft-power"></i> Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                        <% } else { %>
-                        <li class="nav-item"><a class="nav-link dropdown-user-link" data-toggle="modal" data-target="#signup_modal">S'inscrire</a></li>
-                        <li class="nav-item"><a class="nav-link dropdown-user-link" data-toggle="modal" data-target="#login_modal" >Se connecter</a></li>
-                        <% } %>
-                    </ul>
+      class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+      <div class="navbar-wrapper">
+        <div class="navbar-container content">
+          <div class="collapse navbar-collapse show" id="navbar-mobile">
+            <ul class="nav navbar-nav mr-auto float-left">
+            </ul>
+            <ul class="nav navbar-nav float-right">
+
+            </ul>
+            <ul class="nav navbar-nav float-right">
+              <% if (user && typeof user != 'undefined'){%>
+              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
+                  href="#" data-toggle="dropdown">
+                  Mon compte</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <div class="arrow_box_right"><a class="dropdown-item" href="#"><span
+                        class="user-name text-bold-700 ml-1">
+                        <%= user.firstName + " " %><%- user.lastName %>
+                      </span></a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="/profil"><i class="ft-user"></i>
+                      Mon profil</a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="/logout"><i class="ft-power"></i>
+                      Se déconnecter</a>
+                  </div>
                 </div>
-            </div>
+              </li>
+              <% } else { %>
+              <li class="nav-item"><a class="nav-link dropdown-user-link" data-toggle="modal"
+                  data-target="#signup_modal">S'inscrire</a></li>
+              <li class="nav-item"><a class="nav-link dropdown-user-link" data-toggle="modal"
+                  data-target="#login_modal">Se connecter</a></li>
+              <% } %>
+            </ul>
+          </div>
         </div>
+      </div>
     </nav>
-    
+
 
     <div class="modal fade" id="signup_modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title">S'inscrire</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/signup" id="signup_form">
-                    <div>
-                      <label for="firstNameInput">Prénom</label>
-                      <input id="firstNameInput" type="text" name="firstName"required>
-                    </div>
-                    <div>
-                      <label for="lastNameInput">Nom</label>
-                      <input id="lastNameInput" type="text" name="lastName" required>
-                    </div>
-                    <div>
-                      <label for="emailInput">E-mail</label>
-                      <input id="emailInput" type="text" name="email" required>
-                    </div>
-                    <div>
-                        <label for="passwordInput">Password</label>
-                      <input id="passwordInput" type="password" name="password" required>
-                    </div>
-                    <div>
-                        <input type="radio" name="isGrantHolder" value="true" required> Boursier<br>
-                        <input type="radio" name="isGrantHolder" value="false" required> Non Boursier<br>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-              <button type="submit"  form="signup_form" class="btn btn-primary">Inscription</button>
-            </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">S'inscrire</h4>
+          </div>
+          <div class="modal-body">
+            <div id="error"></div>
+            <form method="POST" action="/signup" id="signup_form">
+              <div>
+                <label for="firstNameInput">Prénom</label>
+                <input class="form-control" id="firstNameInput" type="text" name="firstName" required>
+              </div>
+              <div>
+                <label for="lastNameInput">Nom</label>
+                <input class="form-control" id="lastNameInput" type="text" name="lastName" required>
+              </div>
+              <div>
+                <label for="emailInput">E-mail</label>
+                <input class="form-control" id="emailInput" type="text" name="email" required>
+              </div>
+              <div>
+                <label for="passwordInput">Password</label>
+                <input class="form-control" id="passwordInput" type="password" name="password" required>
+              </div>
+              <br />
+              <div>
+                <input type="radio" name="isGrantHolder" value="true" required> Boursier<br>
+                <input type="radio" name="isGrantHolder" value="false" required> Non Boursier<br>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" form="signup_form" class="btn btn-primary">Inscription</button>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="login_modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title">Se connecter</h4>
-            </div>
-            <div class="modal-body">
-                <% if (typeof error !== "undefined" && error.length > 0) { %>
-                    <%- console.log(error) %>
-                    <div>error ! :<%= error %></div>
-                  <% } %>
-                  <form method="POST" id="login_form" action="/login">
-                    <div>
-                      <label for="emailInput">E-mail</label>
-                      <input id="emailInput" type="text" name="email" required>
-                    </div>
-                    <div>
-                        <label for="passwordInput">Password</label>
-                      <input id="passwordInput" type="password" name="password" required>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-              <button type="submit" form="login_form" class="btn btn-primary">Connexion</button>
-            </div>
+    </div>
+    <div class="modal fade" id="login_modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">Se connecter</h4>
+          </div>
+          <div class="modal-body">
+            <% if (typeof error !== "undefined" && error.length > 0) { %>
+            <%- console.log(error) %>
+            <div>error ! :<%= error %></div>
+            <% } %>
+            <form method="POST" id="login_form" action="/login">
+              <div>
+                <label for="emailInput">E-mail</label>
+                <input class="form-control" id="emailInput" type="text" name="email" required>
+              </div>
+              <div>
+                <label for="passwordInput">Password</label>
+                <input class="form-control" id="passwordInput" type="password" name="password" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" form="login_form" class="btn btn-primary">Connexion</button>
           </div>
         </div>
       </div>
+    </div>
 
 
     <% if (page != './homePage') { %>
-      <%- include('./partials/menu.ejs') %>
+    <%- include('./partials/menu.ejs') %>
     <% } %>
 
     <%- include(page) %>
 
     <%- include('./partials/footer.ejs') %>
-
