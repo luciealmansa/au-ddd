@@ -72,6 +72,18 @@ router.post('/testUpload', upload.single('file'), function(req,res) {
   return res.send(req.file);
 });
 
+router.post('/newReminder', function(req, res) { //TODO sanitize reminder :))))))))))))
+  let reminderObject = {
+    date: new Date(req.body.date),
+    title: req.body.title,
+    description: req.body.description,
+    user: req.user._id
+  };
+
+  await ReminderController.createReminder(reminderObject);
+  res.redirect('/');
+});
+
 router.get('/logement', function(req, res) {
   res.render('home', { page: './housing' });
 });
